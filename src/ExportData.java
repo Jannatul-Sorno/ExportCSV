@@ -28,6 +28,20 @@ public class ExportData {
 			}
 		}
 	}
+	public int numberOfExporters(CSVParser parser, String exportItem)
+	{
+		int count = 0;
+		for(CSVRecord record : parser)
+		{
+			String exports = record.get("Exports");
+			
+			if(exports.contains(exportItem))
+			{
+				count++;
+			}
+		}
+		return count;
+	}
 	public void tester()
 	{
 		FileResource fr = new FileResource();
@@ -38,6 +52,12 @@ public class ExportData {
 		
 		parser = fr.getCSVParser();
 		listExportersTwoProducts(parser, "gold", "diamonds");
+		
+		parser = fr.getCSVParser();
+		int count = numberOfExporters(parser, "gold");
+		System.out.println(count);
+		
+		
 	}
 	public static void main(String[] args)
 	{
